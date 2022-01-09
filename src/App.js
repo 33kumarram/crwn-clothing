@@ -38,7 +38,7 @@ unsubsubscribeFromAuth= null;
     <BrowserRouter>
     <Header  />
       <Routes>
-      <Route path='/crwn-clothing' element={<HomePage/>}/>
+      <Route path='/crwn-clothing/' element={<HomePage/>}/>
       <Route path='/shop' element={<ShopPage/>}/>
       <Route path='/signin' element ={<SignInAndSignUpPage/>}/>
       {/* <Route exact path='/signin' render ={()=>this.props.currentUser ? (<Navigate to ='/crwn-clothing' />) : (<SignInAndSignUpPage/>) }/> */}
