@@ -3,16 +3,16 @@ import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
  
 
-const config ={
-  apiKey: "AIzaSyCJpwlCl7jRyOxaXx5VuZckSuoSGcasUZg",
-  authDomain: "crwn-rk-1.firebaseapp.com",
-  projectId: "crwn-rk-1",
-  storageBucket: "crwn-rk-1.appspot.com",
-  messagingSenderId: "599555124437",
-  appId: "1:599555124437:web:deaa5d456595b161ba065c",
-  measurementId: "G-YNC67PTCKG"
+const crwnrk ={
+  apiKey: "AIzaSyAaeS5eDgDTxAYrfx3WnvD_l6qCMWmee5I",
+  authDomain: "crwnrk.firebaseapp.com",
+  projectId: "crwnrk",
+  storageBucket: "crwnrk.appspot.com",
+  messagingSenderId: "914917970032",
+  appId: "1:914917970032:web:4d7ba6827235fcd418e4b5",
+  measurementId: "G-84KVNFRG04"
 };
-firebase.initializeApp(config);
+firebase.initializeApp(crwnrk);
 
 export const createUserProfileDocument = async(userAuth, additionalData)=>{
   if(!userAuth) return;
