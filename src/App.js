@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react';
-import {BrowserRouter,Routes,Navigate  , Route} from 'react-router-dom';
+import {BrowserRouter,Routes , Route} from 'react-router-dom';
 import HomePage from './homepage';
 import ShopPage from './shop/shop.component';
 import Header from './components/header/headercomponent';
@@ -38,9 +38,9 @@ unsubsubscribeFromAuth= null;
     <BrowserRouter>
     <Header  />
       <Routes>
-      <Route exact path='/crwn-clothing' element={<HomePage/>}/>
+      <Route path='/crwn-clothing' element={<HomePage/>}/>
       <Route path='/shop' element={<ShopPage/>}/>
-      <Route exact path='/signin' element ={<SignInAndSignUpPage/>}/>
+      <Route path='/signin' element ={<SignInAndSignUpPage/>}/>
       {/* <Route exact path='/signin' render ={()=>this.props.currentUser ? (<Navigate to ='/crwn-clothing' />) : (<SignInAndSignUpPage/>) }/> */}
 
       </Routes>
