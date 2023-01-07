@@ -33,8 +33,9 @@ class SignIn extends React.Component {
     await userServices
       .signIn({ mobile_no: mobile_no, password: password })
       .then((res) => {
+        localStorage.setItem('user', JSON.stringify(res.user))
         window.alert("Successfully logged in");
-        console.log(res);
+        console.log(localStorage.getItem('user'))
       })
       .catch((err) => {
         window.alert("Invalid mobile number or password");
