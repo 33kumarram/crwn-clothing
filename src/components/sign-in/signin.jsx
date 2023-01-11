@@ -3,7 +3,11 @@ import FormInput from "../form-input/form-input";
 import CustomButton from "../custom button/custombutton";
 import { userServices } from "../../services/user.service";
 import { auth, signInWithGoogle } from "../../firebase/firebase.utils";
+import { createStructuredSelector } from "reselect";
+import { setCurrentUser } from "../../redux/user/user.action";
+import { selectCurrentUser } from "../../redux/user/user.selector";
 import "./signin.style.scss";
+import { connect } from "react-redux";
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -34,8 +38,9 @@ class SignIn extends React.Component {
       .signIn({ mobile_no: mobile_no, password: password })
       .then((res) => {
         localStorage.setItem('user', JSON.stringify(res.user))
+        this.props.setCurrentUser(res.user)
         window.alert("Successfully logged in");
-        console.log(localStorage.getItem('user'))
+        window.location.href='/crwn-clothing'
       })
       .catch((err) => {
         window.alert("Invalid mobile number or password");
@@ -96,4 +101,12 @@ class SignIn extends React.Component {
     );
   }
 }
-export default SignIn;
+
+const mapDispatchToProps = dispatch =>({
+  setCurrentUser: user=> dispatch(setCurrentUser(user))
+});
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

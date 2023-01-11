@@ -9,6 +9,7 @@ import CartIcon from "../carticon/carticon.component";
 import CartDropdown from "../cartdropdown/cartdropdown";
 import { selectCartHidden } from "../../redux/cart/cart.selector";
 import { selectCurrentUser } from "../../redux/user/user.selector";
+import { userServices } from "../../services/user.service";
 import './headercomponent.style.scss'
 
 const Header=({currentUser, hidden})=>(
@@ -25,7 +26,8 @@ const Header=({currentUser, hidden})=>(
             </Link>
             {
                 currentUser ?
-                <div className="option" onClick={()=>auth.signOut()} >SIGN OUT</div>
+                // <div className="option" onClick={()=>auth.signOut()} >SIGN OUT</div>
+                <div className="option" onClick={()=>userServices.logOut()} >SIGN OUT</div>
                 :
                 <Link className="option" to='/signin'>SIGN IN</Link>
             }

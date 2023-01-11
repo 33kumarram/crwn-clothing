@@ -29,6 +29,7 @@ class SignUp extends React.Component {
         await userServices.CreateNewUser({mobile_no:mobile_no, displayName:displayName, email:email, password:password})
         .then(res=>{
           window.alert('New user created')
+          window.location.reload()
           console.log(res)
         })
         .catch(err=>{

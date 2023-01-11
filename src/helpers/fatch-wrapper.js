@@ -1,3 +1,4 @@
+import { userServices } from "../services/user.service";
 
 export const fetchWrapper = {
   post,
@@ -17,7 +18,7 @@ function _delete(url) {
 function post(url, body) {
   const requestOptions = {
     method: "POST",
-    headers: { "Content-Type":"application/json; charset=UTF-8" },
+    headers: { "Content-Type":"application/json; charset=UTF-8", ...authHeader(url) },
     body: JSON.stringify(body),
   };
   return fetch(url, requestOptions).then(handleResponse);
@@ -26,7 +27,7 @@ function post(url, body) {
 function put(url, body) {
   const requestOptions = {
     method: "PUT",
-    headers: { "Content-Type": "application/json; charset=UTF-8" },
+    headers: { "Content-Type": "application/json; charset=UTF-8", ...authHeader(url) },
     body: JSON.stringify(body),
   };
   return fetch(url, requestOptions).then(handleResponse);
@@ -35,7 +36,7 @@ function put(url, body) {
 function get(url) {
   const requestOptions = {
     method: "GET",
-    headers: { "Content-Type": "application/json; charset=UTF-8" },
+    headers: { "Content-Type": "application/json; charset=UTF-8", ...authHeader(url) },
   };
   return fetch(url, requestOptions).then(handleResponse);
 }
@@ -75,14 +76,13 @@ function handleResponse(response) {
 }
 
 function authHeader(url) {
-  // return auth header with jwt if user is logged in and request is to the api url
-  // const user = employeeService.userValue;
-  // const isLoggedIn = user && user.jwtToken;
-  // const isApiUrl = url.startsWith(process.env.REACT_APP_API_URL);
-  // if (isLoggedIn && isApiUrl) {
-    //console.log(`auth token=${user.jwtToken}`)
-    // return { Authorization: `Bearer ${user.jwtToken}` };
-  // } else {
-    // return {};
-  // }
+  const user = userServices.getUser();
+  const isLoggedIn = user && user.token;
+  const isApiUrl = url.startsWith(process.env.REACT_APP_API_URL);
+  console.log(isLoggedIn,isApiUrl, user)
+  if (isLoggedIn && isApiUrl) {
+    return { Authorization: user.token };
+  } else {
+    return {};
+  }
 }

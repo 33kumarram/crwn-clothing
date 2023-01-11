@@ -12,30 +12,37 @@ import { connect } from 'react-redux';
 import { setCurrentUser } from './redux/user/user.action';
 import { selectCurrentUser } from './redux/user/user.selector';
 import { createStructuredSelector } from 'reselect';
+import { userServices } from './services/user.service';
 class App extends React.Component {
   
 unsubsubscribeFromAuth= null; 
    
   componentDidMount(){
-    const {setCurrentUser}=this.props;
-    this.unsubscribeFromAuth=auth.onAuthStateChanged(async userAuth =>{
-      if (userAuth){
-        const userRef= await createUserProfileDocument(userAuth);
-        userRef.onSnapshot( snapShot=>{
-         
-           setCurrentUser({
-             id:snapShot.id,
-             ...snapShot.data()
-           });
-      });
+    let user =userServices.getUser()
+    const {setCurrentUser} = this.props;
+
+    if(user&&user.token){
+      setCurrentUser(user)
     }
-    setCurrentUser(userAuth);
+  //   const {setCurrentUser}=this.props;
+  //   this.unsubscribeFromAuth=auth.onAuthStateChanged(async userAuth =>{
+  //     if (userAuth){
+  //       const userRef= await createUserProfileDocument(userAuth);
+  //       userRef.onSnapshot( snapShot=>{
+         
+  //          setCurrentUser({
+  //            id:snapShot.id,
+  //            ...snapShot.data()
+  //          });
+  //     });
+  //   }
+  //   setCurrentUser(userAuth);
     
-  });
+  // });
 }
-  componentWillUnmount(){
-    this.unsubscribeFromAuth();
-  }
+  // componentWillUnmount(){
+  //   this.unsubscribeFromAuth();
+  // }
   render(){
   return (
     
